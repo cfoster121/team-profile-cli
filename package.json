@@ -1,0 +1,31 @@
+{
+  "name": "team-profile-cli",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cfoster121/team-profile-cli.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cfoster121/team-profile-cli/issues",
+    "dependencies": {
+      "fs": "^0.0.1-security",
+      "inquirer": "^8.2.0",
+      "node": "^17.4.0",
+      "jest": "27.4.7"
+    }
+  },
+  "homepage": "https://github.com/cfoster121/team-profile-cli#readme",
+  "dependencies": {
+    "inquirer": "^8.2.0",
+    "jest": "^27.4.7",
+    "node": "^17.4.0"
+  }
+}
