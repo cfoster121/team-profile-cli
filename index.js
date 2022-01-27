@@ -63,7 +63,7 @@ inquirer
         {
             message: 'Choose next employee below:',
             type: 'list',
-            name: 'add-emp',
+            name: 'add',
             choices: [
                 "Intern",
                 "Engineer",
@@ -71,7 +71,72 @@ inquirer
             ]
         }])
 .then((r) => {
-    console.log(r)
+    if(r.add == "Engineer"){
+        inquirer
+        .prompt([
+            {
+                message: "Engineer name:",
+                type: "input",
+                name: "engName",
+            },
+            {
+                message: "Engineer ID:",
+                type: "input",
+                name: "engId",
+            },
+            {
+                message: "Engineer email:",
+                type: "input",
+                name: "engEmail",
+            },
+            {
+                message: "Engineer GitHub:",
+                type: "input",
+                name: "engGH",
+            }])
+    }
+    if(r.add == "Intern"){
+    inquirer
+        .prompt([
+        {
+            message: "Intern name:",
+            type: "input",
+            name: "intName",
+        },
+        {
+            message: "Intern ID:",
+            type: "input",
+            name: "intId",
+        },
+        {
+            message: "Intern email:",
+            type: "input",
+            name: "intEmail",
+        },
+        {
+            message: "Intern school:",
+            type: "input",
+            name: "intSchool",
+        },
+        // {
+            // message: 'Choose next employee below:',
+            // type: 'list',
+            // name: 'add',
+            // choices: [
+            //     "Intern",
+            //     "Engineer",
+            //     "I am finished",
+            // ]
+        // }
+    ])
+    
+    }
+    if(r.add == "I am finished"){
+        console.log(r)
+        }    
+    // else {
+    //     console.log(r.add)
+    // }
 })
 
 /*
