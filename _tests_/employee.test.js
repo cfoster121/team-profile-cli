@@ -9,14 +9,14 @@ it("Should give you back the name entered into the class", () => {
     expect(testName).toBe("bob")
 })
 
-it("Should give you back the name entered into the class", () => {
+it("Should give you back the ID entered into the class", () => {
     let newEmp = new Employee("bob", "2", "bob@bob.com");
     let testId = newEmp.getId();
 
     expect(testId).toBe("2")
 })
 
-it("Should give you back the name entered into the class", () => {
+it("Should give you back the email entered into the class", () => {
     let newEmp = new Employee("bob", "2", "bob@bob.com");
     let testEmail = newEmp.getEmail();
 
