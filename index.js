@@ -131,10 +131,10 @@ inquirer
             `<!--Card-->
             <article class="container bg-blue-100 rounded-md">
             <div class="bg-blue-900">
-            <h1>${mgName}</h1>
-            <h2>${mgID}</h2>
+            <h1 class="text-2xl text-white underline">${mgName}</h1>
+            <h2 class="text-2xl text-white">${mgID}</h2>
             </div>
-            <div>${role}</div>
+            <div class="text-xl">${role}</div>
             <div><a href = "mailto: ${mgEmail}">Email</a></div>
             <div>${mgOffice}</div>
             </article>`;
@@ -232,10 +232,10 @@ function addIntern() {
                 `<!--Card-->
             <article class="container bg-blue-100 rounded-md">
             <div class="bg-blue-900">
-            <h1>${intName}</h1>
-            <h2>${intID}</h2>
+            <h1 class="text-2xl text-white underline">${intName}</h1>
+            <h2 class="text-2xl text-white">${intID}</h2>
             </div>
-            <div>${role}</div>
+            <div class="text-xl">${role}</div>
             <div><a href = "mailto: ${intEmail}">Email</a></div>
             <div>${intSchool}</div>
             </article>`;
@@ -333,10 +333,10 @@ function addEngineer() {
                 `<!--Card-->
             <article class="container bg-blue-100 rounded-md">
             <div class="bg-blue-900">
-            <h1>${engName}</h1>
-            <h2>${engID}</h2>
+            <h1 class="text-2xl text-white underline">${engName}</h1>
+            <h2 class="text-2xl text-white">${engID}</h2>
             </div>
-            <div>${role}</div>
+            <div class="text-xl">${role}</div>
             <div>${engEmail}</div>
             <div><a href = "https://github.com/${engGH}">GitHub</a></div>
             </article>`;
