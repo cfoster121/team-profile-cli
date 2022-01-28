@@ -41,8 +41,8 @@ const htmlEnd =
 
 let htmlFull = htmlHead + htmlCards + htmlEnd
 
-
-    fs.writeFile("index2.html", htmlFull, function (err) { if (err) throw err; })
+console.log("Finished! File saved as index.html")
+    fs.writeFile("index.html", htmlFull, function (err) { if (err) throw err; })
 }
 
 

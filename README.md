@@ -21,10 +21,6 @@ For this team profile generator, the user needs to install node.js and inquirer.
 To run the tests the user needs to install jest.js (run NPM install in command line)
 
 
-## Essential Code
-![title](link)
-
-
 ## Built With
 
 * [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML)
