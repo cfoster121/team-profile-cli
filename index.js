@@ -84,47 +84,78 @@ var managerInf =
             }
             else {
                 console.log("done")
-                return outputAns
+                return outputAns,
+                console.log(outputAns)
+
             }
         })
 
 function addIntern() {
-    inquirer.prompt([{
-        type: 'recursive',
-        message: 'Add intern?',
-        prompts: ([
-            {
-                message: "Intern name:",
-                type: "input",
-                name: "intName",
-            },
-            {
-                message: "Intern ID:",
-                type: "input",
-                name: "intId",
-            },
-            {
-                message: "Intern email:",
-                type: "input",
-                name: "intEmail",
-            },
-            {
-                message: "Intern school:",
-                type: "input",
-                name: "intSchool",
-            },
-            {
-                message: 'Choose next employee below:',
-                type: 'list',
-                name: 'add',
-                choices: [
-                    "Intern",
-                    "Engineer",
-                    "I am finished",
-                ]
-            }])
+    inquirer.prompt([
+        {
+            message: "Intern name:",
+            type: "input",
+            name: "intName",
+            validate: input => {
+                if (input) {
+                    return true;
+                }
+                else {
+                    console.log("Please enter a name")
+                }
+            }
+        },
+        {
+            message: "Intern ID:",
+            type: "input",
+            name: "intId",
+            validate: input => {
+                if (input) {
+                    return true;
+                }
+                else {
+                    console.log("Please enter an ID")
+                }
+            }
+        },
+        {
+            message: "Intern email:",
+            type: "input",
+            name: "intEmail",
+            validate: input => {
+                if (input) {
+                    return true;
+                }
+                else {
+                    console.log("Please enter an email")
+                }
+            }
+        },
+        {
+            message: "Intern school:",
+            type: "input",
+            name: "intSchool",
+            validate: input => {
+                if (input) {
+                    return true;
+                }
+                else {
+                    console.log("Please enter a school")
+                }
+            }
+        },
+        {
+            message: 'Choose next employee below:',
+            type: 'list',
+            name: 'add',
+            choices: [
+                "Intern",
+                "Engineer",
+                "I am finished",
+            ]
+        }])
 
-    }])
+
         .then((r) => {
             outputAns.push(r)
             if (r.add == "Intern") {
@@ -135,35 +166,67 @@ function addIntern() {
             }
             else {
                 console.log("done")
-                return outputAns
+                return outputAns,
+                console.log(outputAns)
+
             }
         })
 }
 
 function addEngineer() {
-    inquirer.prompt([{
-        type: 'recursive',
-        message: 'Add engineer?',
-        prompts: ([
+    inquirer
+        .prompt([
             {
                 message: "Engineer name:",
                 type: "input",
                 name: "engName",
+                validate: input => {
+                    if (input) {
+                        return true;
+                    }
+                    else {
+                        console.log("Please enter a name")
+                    }
+                }
             },
             {
                 message: "Engineer ID:",
                 type: "input",
                 name: "engId",
+                validate: input => {
+                    if (input) {
+                        return true;
+                    }
+                    else {
+                        console.log("Please enter an ID")
+                    }
+                }
             },
             {
                 message: "Engineer email:",
                 type: "input",
                 name: "engEmail",
+                validate: input => {
+                    if (input) {
+                        return true;
+                    }
+                    else {
+                        console.log("Please enter an email")
+                    }
+                }
             },
             {
-                message: "Engineer GitHub:",
+                message: "Engineer GitHub username:",
                 type: "input",
                 name: "engGH",
+                validate: input => {
+                    if (input) {
+                        return true;
+                    }
+                    else {
+                        console.log("Please enter a GitHub username")
+                    }
+                }
             },
             {
                 message: 'Choose next employee below:',
@@ -175,8 +238,6 @@ function addEngineer() {
                     "I am finished",
                 ]
             }])
-
-    }])
         .then((r) => {
             outputAns.push(r)
             if (r.add == "Intern") {
@@ -187,7 +248,8 @@ function addEngineer() {
             }
             else {
                 console.log("done")
-                return outputAns
+                return outputAns,
+                console.log(outputAns)
             }
         })
 }

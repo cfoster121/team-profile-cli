@@ -30,4 +30,12 @@ describe("Intern values", () => {
         expect(testSchool).toBe("indiana state")
     })
 
+    it("Should give you back the employee role", () => {
+        let newEmp = new Intern("bob", "2", "bob@bob.com");
+        let testRole = newEmp.getRole();
+    
+        expect(testRole).toBe("Intern")
+    })
+
+
     })

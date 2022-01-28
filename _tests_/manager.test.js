@@ -29,4 +29,12 @@ it("Should give you back the office number entered into the class", () => {
     expect(testOffice).toBe("801")
 })
 
+it("Should give you back the employee role", () => {
+    let newEmp = new Manager("bob", "2", "bob@bob.com");
+    let testRole = newEmp.getRole();
+
+    expect(testRole).toBe("Manager")
+})
+
+
 })

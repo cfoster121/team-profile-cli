@@ -20,6 +20,14 @@ it("Should give you back the email entered into the class", () => {
     let newEmp = new Employee("bob", "2", "bob@bob.com");
     let testEmail = newEmp.getEmail();
 
-    expect(testEmail).toBe("bob@bob.com")
+    expect(testEmail).toBe("bob@bob.com")    
 })
+
+it("Should give you back the employee role", () => {
+    let newEmp = new Employee("bob", "2", "bob@bob.com");
+    let testRole = newEmp.getRole();
+
+    expect(testRole).toBe("Employee")
+})
+
 })

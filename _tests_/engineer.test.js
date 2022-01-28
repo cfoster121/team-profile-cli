@@ -25,9 +25,17 @@ describe("Engineer values", () => {
 
     it("Should give you back the GitHub username entered into the class", () => {
         let newEmp = new Engineer("ed", "3", "ed@engineer.com", "edengineer");
-        let testGH = newEmp.getGh;
+        let testGH = newEmp.getGh();
     
         expect(testGH).toBe("edengineer")
     })
+
+    it("Should give you back the employee role", () => {
+        let newEmp = new Engineer("bob", "2", "bob@bob.com");
+        let testRole = newEmp.getRole();
+    
+        expect(testRole).toBe("Engineer")
+    })
+    
 
     })
