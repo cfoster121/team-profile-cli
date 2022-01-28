@@ -135,7 +135,7 @@ inquirer
             <h2>${mgID}</h2>
             </div>
             <div>${role}</div>
-            <div>${mgEmail}</div>
+            <div><a href = "mailto: ${mgEmail}">Email</a></div>
             <div>${mgOffice}</div>
             </article>`;
         htmlCards += card
@@ -236,7 +236,7 @@ function addIntern() {
             <h2>${intID}</h2>
             </div>
             <div>${role}</div>
-            <div>${intEmail}</div>
+            <div><a href = "mailto: ${intEmail}">Email</a></div>
             <div>${intSchool}</div>
             </article>`;
             htmlCards += card
@@ -338,7 +338,7 @@ function addEngineer() {
             </div>
             <div>${role}</div>
             <div>${engEmail}</div>
-            <div>${engGH}</div>
+            <div><a href = "https://github.com/${engGH}">GitHub</a></div>
             </article>`;
 
             htmlCards += card
