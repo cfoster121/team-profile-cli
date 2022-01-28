@@ -3,7 +3,8 @@ var inquirer = require('inquirer');
 const Employee = require('./lib/employee')
 const Manager = require("./lib/manager");
 const Intern = require('./lib/intern')
-const Engineer = require('./lib/engineer')
+const Engineer = require('./lib/engineer');
+const { Console } = require('console');
 
 
 var htmlHead =
@@ -133,7 +134,7 @@ var managerInf =
                 let role = newMg.getRole();
 
                 var card =
-                `<!--Card-->
+                    `<!--Card-->
                 <article class="container bg-blue-100 rounded-md">
                 <div class="bg-blue-900">
                 <h1>${mgName}</h1>
@@ -143,7 +144,7 @@ var managerInf =
                 <div>${mgEmail}</div>
                 <div>${mgOffice}</div>
                 </article>`;
-htmlCards += card
+                htmlCards += card
 
             }
         })
@@ -228,11 +229,11 @@ function addIntern() {
                 let intName = newInt.getName();
                 let intID = newInt.getId();
                 let intEmail = newInt.getEmail();
-                let inSchool = newInt.getSchool();
+                let intSchool = newInt.getSchool();
                 let role = newInt.getRole();
 
                 var card =
-                `<!--Card-->
+                    `<!--Card-->
                 <article class="container bg-blue-100 rounded-md">
                 <div class="bg-blue-900">
                 <h1>${intName}</h1>
@@ -242,8 +243,7 @@ function addIntern() {
                 <div>${intEmail}</div>
                 <div>${intSchool}</div>
                 </article>`;
-                console.log(card)
-// htmlCards += card
+                htmlCards += card
 
             }
         })
@@ -323,13 +323,28 @@ function addEngineer() {
                 addEngineer();
             }
             else {
-                console.log("done")
-                return outputAns,
-                    console.log(outputAns),
-                    fs.appendFile("index2.html", html, function (err) {
-                        if (err) throw err;
-                        console.log('Saved');
-                    })
+  
+                var newEng = new Engineer(r.engName, r.engId, r.engEmail, r.engGH);
+
+                let engName = newEng.getName();
+                let engID = newEng.getId();
+                let engEmail = newEng.getEmail();
+                let engGH = newEng.getGh();
+                let role = newEng.getRole();
+
+                var card =
+                    `<!--Card-->
+                <article class="container bg-blue-100 rounded-md">
+                <div class="bg-blue-900">
+                <h1>${engName}</h1>
+                <h2>${engID}</h2>
+                </div>
+                <div>${role}</div>
+                <div>${engEmail}</div>
+                <div>${engGH}</div>
+                </article>`;
+                htmlCards += card
+
             }
         })
 }
