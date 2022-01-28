@@ -6,8 +6,12 @@ const Intern = require('./lib/intern')
 const Engineer = require('./lib/engineer');
 const { Console } = require('console');
 
+var htmlCards = ''
 
-var htmlHead =
+
+function html() {
+
+const htmlHead =
     `<!DOCTYPE html>
 <html>
 <head>
@@ -29,125 +33,124 @@ var htmlHead =
 <!--Grid layout-->
 <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-20 px-20 pt-5">`
 
-var htmlEnd =
+const htmlEnd =
     `</section>
 </body>
 </html>`
 
-var htmlCards = ''
+
+let htmlFull = htmlHead + htmlCards + htmlEnd
+
+
+    fs.writeFile("index2.html", htmlFull, function (err) { if (err) throw err; })
+}
+
 
 var outputAns = []
 
 console.log("\n***\n Welcome to Team Profile generator! \nType your response to each prompt and press enter to submit. \n***\n")
 
-var managerInf =
-    inquirer
-        .prompt([
-            {
-                message: 'Manager name:',
-                type: 'input',
-                name: 'manName',
-                validate: input => {
-                    if (input) {
-                        return true;
-                    }
-                    else {
-                        console.log("Please enter a name")
-                    }
+
+inquirer
+    .prompt([
+        {
+            message: 'Manager name:',
+            type: 'input',
+            name: 'manName',
+            validate: input => {
+                if (input) {
+                    return true;
                 }
-            },
-            {
-                message: 'Manager ID:',
-                type: 'input',
-                name: 'manId',
-                validate: input => {
-                    if (input) {
-                        return true;
-                    }
-                    else {
-                        console.log("Please enter an ID")
-                    }
+                else {
+                    console.log("Please enter a name")
                 }
-            },
-            {
-                message: 'Manager email address:',
-                type: 'input',
-                name: 'manEmail',
-                validate: input => {
-                    if (input) {
-                        return true;
-                    }
-                    else {
-                        console.log("Please enter an email")
-                    }
+            }
+        },
+        {
+            message: 'Manager ID:',
+            type: 'input',
+            name: 'manId',
+            validate: input => {
+                if (input) {
+                    return true;
                 }
-            },
-            {
-                message: 'Manager office number:',
-                type: 'input',
-                name: 'manOffice',
-                validate: input => {
-                    if (input) {
-                        return true;
-                    }
-                    else {
-                        console.log("Please enter an office number")
-                    }
+                else {
+                    console.log("Please enter an ID")
                 }
-            },
-            {
-                message: 'Choose next employee below:',
-                type: 'list',
-                name: 'add',
-                choices: [
-                    "Intern",
-                    "Engineer",
-                    "I am finished",
-                ]
             }
-
-        ])
-        .then((r) => {
-            outputAns.push(r)
-            if (r.add == "Intern") {
-                addIntern()
+        },
+        {
+            message: 'Manager email address:',
+            type: 'input',
+            name: 'manEmail',
+            validate: input => {
+                if (input) {
+                    return true;
+                }
+                else {
+                    console.log("Please enter an email")
+                }
             }
-            else if (r.add == "Engineer") {
-                addEngineer();
+        },
+        {
+            message: 'Manager office number:',
+            type: 'input',
+            name: 'manOffice',
+            validate: input => {
+                if (input) {
+                    return true;
+                }
+                else {
+                    console.log("Please enter an office number")
+                }
             }
-            // else {
-            //     console.log("done")
-            //     return outputAns,
-            //         console.log(outputAns),
-            //         fs.appendFile("index2.html", html, function (err) {
-            //             if (err) throw err;
-            //             console.log('Saved');
-            //         })
+        },
+        {
+            message: 'Choose next employee below:',
+            type: 'list',
+            name: 'add',
+            choices: [
+                "Intern",
+                "Engineer",
+                "I am finished",
+            ]
+        }
 
-            else {
-                var newMg = new Manager(r.manName, r.manId, r.manEmail, r.manOffice);
+    ])
+    .then((r) => {
+        outputAns.push(r)
+        var newMg = new Manager(r.manName, r.manId, r.manEmail, r.manOffice);
 
-                let mgName = newMg.getName();
-                let mgID = newMg.getId();
-                let mgEmail = newMg.getEmail();
-                let mgOffice = newMg.getOffice();
-                let role = newMg.getRole();
+        let mgName = newMg.getName();
+        let mgID = newMg.getId();
+        let mgEmail = newMg.getEmail();
+        let mgOffice = newMg.getOffice();
+        let role = newMg.getRole();
 
-                var card =
-                    `<!--Card-->
-                <article class="container bg-blue-100 rounded-md">
-                <div class="bg-blue-900">
-                <h1>${mgName}</h1>
-                <h2>${mgID}</h2>
-                </div>
-                <div>${role}</div>
-                <div>${mgEmail}</div>
-                <div>${mgOffice}</div>
-                </article>`;
-                htmlCards += card
+        var card =
+            `<!--Card-->
+            <article class="container bg-blue-100 rounded-md">
+            <div class="bg-blue-900">
+            <h1>${mgName}</h1>
+            <h2>${mgID}</h2>
+            </div>
+            <div>${role}</div>
+            <div>${mgEmail}</div>
+            <div>${mgOffice}</div>
+            </article>`;
+        htmlCards += card
 
-            }
-        })
+        if (r.add == "Intern") {
+            addIntern()
+        }
+        else if (r.add == "Engineer") {
+            addEngineer();
+        }
+
+        else {
+            html();
+        }
+    })
 
 function addIntern() {
     inquirer.prompt([
@@ -217,6 +220,27 @@ function addIntern() {
 
         .then((r) => {
             outputAns.push(r)
+            var newInt = new Intern(r.intName, r.intId, r.intEmail, r.intSchool);
+
+            let intName = newInt.getName();
+            let intID = newInt.getId();
+            let intEmail = newInt.getEmail();
+            let intSchool = newInt.getSchool();
+            let role = newInt.getRole();
+
+            var card =
+                `<!--Card-->
+            <article class="container bg-blue-100 rounded-md">
+            <div class="bg-blue-900">
+            <h1>${intName}</h1>
+            <h2>${intID}</h2>
+            </div>
+            <div>${role}</div>
+            <div>${intEmail}</div>
+            <div>${intSchool}</div>
+            </article>`;
+            htmlCards += card
+
             if (r.add == "Intern") {
                 addIntern();
             }
@@ -224,26 +248,7 @@ function addIntern() {
                 addEngineer();
             }
             else {
-                var newInt = new Intern(r.intName, r.intId, r.intEmail, r.intSchool);
-
-                let intName = newInt.getName();
-                let intID = newInt.getId();
-                let intEmail = newInt.getEmail();
-                let intSchool = newInt.getSchool();
-                let role = newInt.getRole();
-
-                var card =
-                    `<!--Card-->
-                <article class="container bg-blue-100 rounded-md">
-                <div class="bg-blue-900">
-                <h1>${intName}</h1>
-                <h2>${intID}</h2>
-                </div>
-                <div>${role}</div>
-                <div>${intEmail}</div>
-                <div>${intSchool}</div>
-                </article>`;
-                htmlCards += card
+                html()
 
             }
         })
@@ -316,6 +321,28 @@ function addEngineer() {
             }])
         .then((r) => {
             outputAns.push(r)
+            var newEng = new Engineer(r.engName, r.engId, r.engEmail, r.engGH);
+
+            let engName = newEng.getName();
+            let engID = newEng.getId();
+            let engEmail = newEng.getEmail();
+            let engGH = newEng.getGh();
+            let role = newEng.getRole();
+
+            var card =
+                `<!--Card-->
+            <article class="container bg-blue-100 rounded-md">
+            <div class="bg-blue-900">
+            <h1>${engName}</h1>
+            <h2>${engID}</h2>
+            </div>
+            <div>${role}</div>
+            <div>${engEmail}</div>
+            <div>${engGH}</div>
+            </article>`;
+
+            htmlCards += card
+
             if (r.add == "Intern") {
                 addIntern();
             }
@@ -323,42 +350,13 @@ function addEngineer() {
                 addEngineer();
             }
             else {
-  
-                var newEng = new Engineer(r.engName, r.engId, r.engEmail, r.engGH);
+                html()
 
-                let engName = newEng.getName();
-                let engID = newEng.getId();
-                let engEmail = newEng.getEmail();
-                let engGH = newEng.getGh();
-                let role = newEng.getRole();
 
-                var card =
-                    `<!--Card-->
-                <article class="container bg-blue-100 rounded-md">
-                <div class="bg-blue-900">
-                <h1>${engName}</h1>
-                <h2>${engID}</h2>
-                </div>
-                <div>${role}</div>
-                <div>${engEmail}</div>
-                <div>${engGH}</div>
-                </article>`;
-                htmlCards += card
 
             }
         })
 }
-
-
-// /*
-// 1 - create employee class
-// 2 - create engineer, intern, manager, extension classes
-// 3 - create tests for each class
-// 4 - run tests for each class
-// 5 - create cli prompts
-// 6 - create html skeleton
-// 7 - run cli to make functioning html page
-// */
 
 
 
