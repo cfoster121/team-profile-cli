@@ -1,7 +1,39 @@
 var fs = require('fs');
 var inquirer = require('inquirer');
+const Employee = require('./lib/employee')
+const Manager = require("./lib/manager");
+const Intern = require('./lib/intern')
+const Engineer = require('./lib/engineer')
 
-inquirer.registerPrompt('recursive', require('inquirer-recursive'));
+
+var htmlHead =
+    `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Team Profile</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="">
+<script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+<body class=bg-sky-100>
+
+<!--header-->
+<header class="bg-blue-500">
+<h1 class="text-5xl text-center py-20">Meet Our Team</h1>
+</header>
+
+<!--Grid layout-->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-20 px-20 pt-5">`
+
+var htmlEnd =
+    `</section>
+</body>
+</html>`
+
+var htmlCards = ''
 
 var outputAns = []
 
@@ -13,7 +45,7 @@ var managerInf =
             {
                 message: 'Manager name:',
                 type: 'input',
-                name: 'man-name',
+                name: 'manName',
                 validate: input => {
                     if (input) {
                         return true;
@@ -26,7 +58,7 @@ var managerInf =
             {
                 message: 'Manager ID:',
                 type: 'input',
-                name: 'man-id',
+                name: 'manId',
                 validate: input => {
                     if (input) {
                         return true;
@@ -39,7 +71,7 @@ var managerInf =
             {
                 message: 'Manager email address:',
                 type: 'input',
-                name: 'man-email',
+                name: 'manEmail',
                 validate: input => {
                     if (input) {
                         return true;
@@ -52,7 +84,7 @@ var managerInf =
             {
                 message: 'Manager office number:',
                 type: 'input',
-                name: 'man-office',
+                name: 'manOffice',
                 validate: input => {
                     if (input) {
                         return true;
@@ -82,10 +114,36 @@ var managerInf =
             else if (r.add == "Engineer") {
                 addEngineer();
             }
+            // else {
+            //     console.log("done")
+            //     return outputAns,
+            //         console.log(outputAns),
+            //         fs.appendFile("index2.html", html, function (err) {
+            //             if (err) throw err;
+            //             console.log('Saved');
+            //         })
+
             else {
-                console.log("done")
-                return outputAns,
-                console.log(outputAns)
+                var newMg = new Manager(r.manName, r.manId, r.manEmail, r.manOffice);
+
+                let mgName = newMg.getName();
+                let mgID = newMg.getId();
+                let mgEmail = newMg.getEmail();
+                let mgOffice = newMg.getOffice();
+                let role = newMg.getRole();
+
+                var card =
+                `<!--Card-->
+                <article class="container bg-blue-100 rounded-md">
+                <div class="bg-blue-900">
+                <h1>${mgName}</h1>
+                <h2>${mgID}</h2>
+                </div>
+                <div>${role}</div>
+                <div>${mgEmail}</div>
+                <div>${mgOffice}</div>
+                </article>`;
+htmlCards += card
 
             }
         })
@@ -165,9 +223,27 @@ function addIntern() {
                 addEngineer();
             }
             else {
-                console.log("done")
-                return outputAns,
-                console.log(outputAns)
+                var newInt = new Intern(r.intName, r.intId, r.intEmail, r.intSchool);
+
+                let intName = newInt.getName();
+                let intID = newInt.getId();
+                let intEmail = newInt.getEmail();
+                let inSchool = newInt.getSchool();
+                let role = newInt.getRole();
+
+                var card =
+                `<!--Card-->
+                <article class="container bg-blue-100 rounded-md">
+                <div class="bg-blue-900">
+                <h1>${intName}</h1>
+                <h2>${intID}</h2>
+                </div>
+                <div>${role}</div>
+                <div>${intEmail}</div>
+                <div>${intSchool}</div>
+                </article>`;
+                console.log(card)
+// htmlCards += card
 
             }
         })
@@ -249,7 +325,11 @@ function addEngineer() {
             else {
                 console.log("done")
                 return outputAns,
-                console.log(outputAns)
+                    console.log(outputAns),
+                    fs.appendFile("index2.html", html, function (err) {
+                        if (err) throw err;
+                        console.log('Saved');
+                    })
             }
         })
 }
@@ -268,28 +348,3 @@ function addEngineer() {
 
 
 
-// inquirer.prompt([{
-//   type: 'recursive',
-//   message: 'Enter intern info',
-//   prompts: [
-//     {
-//         message: "Intern name:",
-//         type: "input",
-//         name: "intName",
-//     },
-//     {
-//         message: "Intern ID:",
-//         type: "input",
-//         name: "intId",
-//     },
-//     {
-//         message: "Intern email:",
-//         type: "input",
-//         name: "intEmail",
-//     },
-//     {
-//         message: "Intern school:",
-//         type: "input",
-//         name: "intSchool",
-//     }]
-// }]
