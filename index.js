@@ -337,7 +337,7 @@ function addEngineer() {
             <h2 class="text-2xl text-white">${engID}</h2>
             </div>
             <div class="text-xl">${role}</div>
-            <div>${engEmail}</div>
+            <div><a href = "mailto: ${engEmail}">Email</a></div>
             <div><a href = "https://github.com/${engGH}">GitHub</a></div>
             </article>`;
 
