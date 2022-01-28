@@ -1,19 +1,25 @@
 const Employee = require("../lib/employee");
+const { isTypedArray } = require("util/types");
 
-describe("Get name", () => {
-    it("Should return the name typed into inquirer prompt", () => {
-        expect(new Employee("bob").toBe("bob"));
-    })
+describe("All employee values", () => {
+it("Should give you back the name entered into the class", () => {
+    let newEmp = new Employee("bob", "2", "bob@bob.com");
+    let testName = newEmp.getName();
+
+    expect(testName).toBe("bob")
 })
 
-describe("Get ID", () => {
-    it("Should return the ID typed into inquirer prompt", () => {
-        expect(new Employee("bob, 32").toBe("32"));
-    })
+it("Should give you back the name entered into the class", () => {
+    let newEmp = new Employee("bob", "2", "bob@bob.com");
+    let testId = newEmp.getId();
+
+    expect(testId).toBe("2")
 })
 
-describe("Get email", () => {
-    it("Should return the email typed into inquirer prompt", () => {
-        expect(new Employee("bob, 32, bob@bob.com").toBe("bob@bob.com"));
-    })
+it("Should give you back the name entered into the class", () => {
+    let newEmp = new Employee("bob", "2", "bob@bob.com");
+    let testEmail = newEmp.getEmail();
+
+    expect(testEmail).toBe("bob@bob.com")
+})
 })

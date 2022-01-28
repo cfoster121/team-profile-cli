@@ -5,4 +5,3 @@ describe("Office number", () => {
         expect(new Manager("bob, 32, bob@bob.com, 123").toBe("123"));
     })
 })
-
