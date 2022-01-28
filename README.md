@@ -12,7 +12,7 @@ This application uses the CLI to generate an web page displaying company team me
 * Follow inquirer prompts in terminal
 * New file will be saved in folder as "index.html" which can then be opened in a server
 
-* Watch tutorial [here](#)
+* Watch tutorial [here](https://youtu.be/ORU8L1jjwnc)
 
 
 ### Prerequisites
