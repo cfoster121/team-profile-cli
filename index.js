@@ -6,13 +6,15 @@ const Intern = require('./lib/intern')
 const Engineer = require('./lib/engineer');
 const { Console } = require('console');
 
+//Empty string for card HTML to fill after entered by user in CLI
 var htmlCards = ''
 
-
+//Function to create HTML document after user completes CLI prompts
 function html() {
 
-const htmlHead =
-    `<!DOCTYPE html>
+    //Header HTML
+    const htmlHead =
+        `<!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
@@ -33,25 +35,30 @@ const htmlHead =
 <!--Grid layout-->
 <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-20 px-20 pt-5">`
 
-const htmlEnd =
-    `</section>
+    //Closing HTML
+    const htmlEnd =
+        `</section>
 </body>
 </html>`
 
+    //Combines header, card data, and closing HTML to create complete HTML document
+    let htmlFull = htmlHead + htmlCards + htmlEnd
 
-let htmlFull = htmlHead + htmlCards + htmlEnd
-
-console.log("Finished! File saved as index.html")
+    //Writes message to CLI console log and creates new index.html file in folder
+    console.log("Finished! File saved as index.html")
     fs.writeFile("index.html", htmlFull, function (err) { if (err) throw err; })
 }
 
-
+//Empty array for team member data input in CLI to crete employee cards
 var outputAns = []
 
+
+//Welcome message in CLI when application is started
 console.log("\n***\n Welcome to Team Profile generator! \nType your response to each prompt and press enter to submit. \n***\n")
 
-
+//User prompts
 inquirer
+    //Create a manager
     .prompt([
         {
             message: 'Manager name:',
@@ -117,8 +124,10 @@ inquirer
         }
 
     ])
+    //Push response data to outputAns array
     .then((r) => {
         outputAns.push(r)
+        //Create a new instance of Manager
         var newMg = new Manager(r.manName, r.manId, r.manEmail, r.manOffice);
 
         let mgName = newMg.getName();
@@ -127,9 +136,10 @@ inquirer
         let mgOffice = newMg.getOffice();
         let role = newMg.getRole();
 
+        //Create new employee card with Manager data
         var card =
             `<!--Card-->
-            <article class="container bg-blue-100 rounded-lg text-center">
+            <article class="container shadow-md bg-blue-100 rounded-lg text-center">
             <div class="bg-blue-900 rounded-t-lg py-2 capitalize">
             <h1 class="text-3xl text-white font-semibold">${mgName}</h1>
             <h2 class="text-lg text-slate-300">ID: ${mgID}</h2>
@@ -138,90 +148,98 @@ inquirer
             <div class="ml-3 mb-2 hover:text-blue-700 hover:font-semibold"><a href = "mailto: ${mgEmail}">${mgEmail}</a></div>
             <div class="ml-3 mb-3">Office: ${mgOffice}</div>
             </article>`;
+
+        //Add new card to htmlCards string
         htmlCards += card
 
+        //If user selects to add an intern, run addIntern function
         if (r.add == "Intern") {
             addIntern()
         }
+        //If user selects to add an engineer, run addEngineer function
         else if (r.add == "Engineer") {
             addEngineer();
         }
-
+        //If user selects 'I am finished', run html function and create html document
         else {
             html();
         }
     })
 
 function addIntern() {
-    inquirer.prompt([
-        {
-            message: "Intern name:",
-            type: "input",
-            name: "intName",
-            validate: input => {
-                if (input) {
-                    return true;
+    inquirer
+        //Create an intern
+        .prompt([
+            {
+                message: "Intern name:",
+                type: "input",
+                name: "intName",
+                validate: input => {
+                    if (input) {
+                        return true;
+                    }
+                    else {
+                        console.log("Please enter a name")
+                    }
                 }
-                else {
-                    console.log("Please enter a name")
+            },
+            {
+                message: "Intern ID:",
+                type: "input",
+                name: "intId",
+                validate: input => {
+                    if (input) {
+                        return true;
+                    }
+                    else {
+                        console.log("Please enter an ID")
+                    }
                 }
-            }
-        },
-        {
-            message: "Intern ID:",
-            type: "input",
-            name: "intId",
-            validate: input => {
-                if (input) {
-                    return true;
+            },
+            {
+                message: "Intern email:",
+                type: "input",
+                name: "intEmail",
+                validate: input => {
+                    if (input) {
+                        return true;
+                    }
+                    else {
+                        console.log("Please enter an email")
+                    }
                 }
-                else {
-                    console.log("Please enter an ID")
+            },
+            {
+                message: "Intern school:",
+                type: "input",
+                name: "intSchool",
+                validate: input => {
+                    if (input) {
+                        return true;
+                    }
+                    else {
+                        console.log("Please enter a school")
+                    }
                 }
-            }
-        },
-        {
-            message: "Intern email:",
-            type: "input",
-            name: "intEmail",
-            validate: input => {
-                if (input) {
-                    return true;
-                }
-                else {
-                    console.log("Please enter an email")
-                }
-            }
-        },
-        {
-            message: "Intern school:",
-            type: "input",
-            name: "intSchool",
-            validate: input => {
-                if (input) {
-                    return true;
-                }
-                else {
-                    console.log("Please enter a school")
-                }
-            }
-        },
-        {
-            message: 'Choose next employee below:',
-            type: 'list',
-            name: 'add',
-            choices: [
-                "Intern",
-                "Engineer",
-                "I am finished",
-            ]
-        }])
+            },
+            {
+                message: 'Choose next employee below:',
+                type: 'list',
+                name: 'add',
+                choices: [
+                    "Intern",
+                    "Engineer",
+                    "I am finished",
+                ]
+            }])
 
-
+        //Push response data to outputAns array
         .then((r) => {
             outputAns.push(r)
+            //Create a new instance of Intern
             var newInt = new Intern(r.intName, r.intId, r.intEmail, r.intSchool);
 
+            //Create new employee card with Intern data
             let intName = newInt.getName();
             let intID = newInt.getId();
             let intEmail = newInt.getEmail();
@@ -229,8 +247,8 @@ function addIntern() {
             let role = newInt.getRole();
 
             var card =
-            `<!--Card-->
-            <article class="container bg-blue-100 rounded-lg text-center">
+                `<!--Card-->
+            <article class="container shadow-md bg-blue-100 rounded-lg text-center">
             <div class="bg-blue-900 rounded-t-lg py-2 capitalize">
             <h1 class="text-3xl text-white font-semibold">${intName}</h1>
             <h2 class="text-lg text-slate-300">ID: ${intID}</h2>
@@ -240,21 +258,27 @@ function addIntern() {
             <div class="ml-3 mb-3">Education: ${intSchool}</div>
             </article>`
 
+            //Add new card to htmlCards string
+            htmlCards += card
+
+            //If user selects to add an intern, run addIntern function
             if (r.add == "Intern") {
-                addIntern();
+                addIntern()
             }
+            //If user selects to add an engineer, run addEngineer function
             else if (r.add == "Engineer") {
                 addEngineer();
             }
+            //If user selects 'I am finished', run html function and create html document
             else {
-                html()
-
+                html();
             }
         })
 }
 
 function addEngineer() {
     inquirer
+        //Create an engineer
         .prompt([
             {
                 message: "Engineer name:",
@@ -318,10 +342,14 @@ function addEngineer() {
                     "I am finished",
                 ]
             }])
+
+        //Push response data to outputAns array
         .then((r) => {
             outputAns.push(r)
+            //Create a new instance of Engineer
             var newEng = new Engineer(r.engName, r.engId, r.engEmail, r.engGH);
 
+            //Create new employee card with Intern data
             let engName = newEng.getName();
             let engID = newEng.getId();
             let engEmail = newEng.getEmail();
@@ -329,30 +357,31 @@ function addEngineer() {
             let role = newEng.getRole();
 
             var card =
-            `<!--Card-->
-            <article class="container bg-blue-100 rounded-lg text-center">
+                `<!--Card-->
+            <article class="container shadow-md bg-blue-100 rounded-lg text-center">
             <div class="bg-blue-900 rounded-t-lg py-2 capitalize">
             <h1 class="text-3xl text-white font-semibold">${engName}</h1>
             <h2 class="text-lg text-slate-300">ID: ${engID}</h2>
             </div>
             <div class="ml-3 m-2 text-xl font-semibold">${role}</div>
             <div class="ml-3 mb-2 hover:text-blue-700 hover:font-semibold"><a href = "mailto: ${engEmail}">${engEmail}</a></div>
-            <div class="ml-3 mb-3"><a href = "https://github.com/${engGH}">GitHub</a></div>
+            <div class="ml-3 mb-3 hover:text-blue-700 hover:font-semibold"><a href = "https://github.com/${engGH}">GitHub</a></div>
             </article>`
 
+            //Add new card to htmlCards string
             htmlCards += card
 
+            //If user selects to add an intern, run addIntern function
             if (r.add == "Intern") {
-                addIntern();
+                addIntern()
             }
+            //If user selects to add an engineer, run addEngineer function
             else if (r.add == "Engineer") {
                 addEngineer();
             }
+            //If user selects 'I am finished', run html function and create html document
             else {
-                html()
-
-
-
+                html();
             }
         })
 }
