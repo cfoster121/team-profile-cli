@@ -23,7 +23,7 @@ const htmlHead =
 <script src="https://cdn.tailwindcss.com"></script>
 
 </head>
-<body class=bg-sky-100>
+<body class=bg-white>
 
 <!--header-->
 <header class="bg-blue-500">
@@ -129,14 +129,14 @@ inquirer
 
         var card =
             `<!--Card-->
-            <article class="container bg-blue-100 rounded-md">
-            <div class="bg-blue-900">
-            <h1 class="text-2xl text-white underline">${mgName}</h1>
-            <h2 class="text-2xl text-white">${mgID}</h2>
+            <article class="container bg-blue-100 rounded-lg text-center">
+            <div class="bg-blue-900 rounded-t-lg py-2 capitalize">
+            <h1 class="text-3xl text-white font-semibold">${mgName}</h1>
+            <h2 class="text-lg text-slate-300">ID: ${mgID}</h2>
             </div>
-            <div class="text-xl">${role}</div>
-            <div><a href = "mailto: ${mgEmail}">Email</a></div>
-            <div>${mgOffice}</div>
+            <div class="ml-3 m-2 text-xl font-semibold">${role}</div>
+            <div class="ml-3 mb-2 hover:text-blue-700 hover:font-semibold"><a href = "mailto: ${mgEmail}">${mgEmail}</a></div>
+            <div class="ml-3 mb-3">Office: ${mgOffice}</div>
             </article>`;
         htmlCards += card
 
@@ -229,17 +229,16 @@ function addIntern() {
             let role = newInt.getRole();
 
             var card =
-                `<!--Card-->
-            <article class="container bg-blue-100 rounded-md">
-            <div class="bg-blue-900">
-            <h1 class="text-2xl text-white underline">${intName}</h1>
-            <h2 class="text-2xl text-white">${intID}</h2>
+            `<!--Card-->
+            <article class="container bg-blue-100 rounded-lg text-center">
+            <div class="bg-blue-900 rounded-t-lg py-2 capitalize">
+            <h1 class="text-3xl text-white font-semibold">${intName}</h1>
+            <h2 class="text-lg text-slate-300">ID: ${intID}</h2>
             </div>
-            <div class="text-xl">${role}</div>
-            <div><a href = "mailto: ${intEmail}">Email</a></div>
-            <div>${intSchool}</div>
-            </article>`;
-            htmlCards += card
+            <div class="ml-3 m-2 text-xl font-semibold">${role}</div>
+            <div class="ml-3 mb-2 hover:text-blue-700 hover:font-semibold"><a href = "mailto: ${intEmail}">${intEmail}</a></div>
+            <div class="ml-3 mb-3">Education: ${intSchool}</div>
+            </article>`
 
             if (r.add == "Intern") {
                 addIntern();
@@ -330,16 +329,16 @@ function addEngineer() {
             let role = newEng.getRole();
 
             var card =
-                `<!--Card-->
-            <article class="container bg-blue-100 rounded-md">
-            <div class="bg-blue-900">
-            <h1 class="text-2xl text-white underline">${engName}</h1>
-            <h2 class="text-2xl text-white">${engID}</h2>
+            `<!--Card-->
+            <article class="container bg-blue-100 rounded-lg text-center">
+            <div class="bg-blue-900 rounded-t-lg py-2 capitalize">
+            <h1 class="text-3xl text-white font-semibold">${engName}</h1>
+            <h2 class="text-lg text-slate-300">ID: ${engID}</h2>
             </div>
-            <div class="text-xl">${role}</div>
-            <div><a href = "mailto: ${engEmail}">Email</a></div>
-            <div><a href = "https://github.com/${engGH}">GitHub</a></div>
-            </article>`;
+            <div class="ml-3 m-2 text-xl font-semibold">${role}</div>
+            <div class="ml-3 mb-2 hover:text-blue-700 hover:font-semibold"><a href = "mailto: ${engEmail}">${engEmail}</a></div>
+            <div class="ml-3 mb-3"><a href = "https://github.com/${engGH}">GitHub</a></div>
+            </article>`
 
             htmlCards += card
 
